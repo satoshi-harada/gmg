@@ -1,17 +1,21 @@
 <template>
   <v-app>
-    <v-toolbar app dark color="primary">
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Git Message Generator</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn flat icon>
+    <v-tabs centered color="cyan" dark icons-and-text>
+      <v-tabs-slider color="yellow"></v-tabs-slider>
+      <v-tab to="/commit-message">
+        Commit Message
+        <v-icon>message</v-icon>
+      </v-tab>
+      <v-tab to="/branch-name">
+        Branch Name
+        <v-icon>call_split</v-icon>
+      </v-tab>
+      <v-tab to="/setting">
+        Setting
         <v-icon>settings</v-icon>
-      </v-btn>
-    </v-toolbar>
-    <v-content>
-      <router-view></router-view>
-    </v-content>
+      </v-tab>
+    </v-tabs>
+    <router-view></router-view>
   </v-app>
 </template>
 

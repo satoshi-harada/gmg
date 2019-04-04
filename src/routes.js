@@ -1,5 +1,6 @@
 import BranchName from './components/BranchName.vue'
 import CommitMessage from './components/CommitMessage.vue'
+import Setting from './components/Setting.vue'
 
 export const routes = [
   {
@@ -13,5 +14,9 @@ export const routes = [
   {
     path: '/commit-message',
     component: CommitMessage
+  },
+  {
+    path: '/setting',
+    component: Setting
   }
 ]
