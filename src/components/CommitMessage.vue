@@ -39,36 +39,17 @@
         </v-form>
       </v-flex>
     </v-layout>
-
-    <v-layout text-lg-left wrap>
-      <v-flex xs12>
-        <v-card>
-          <v-card-title primary-title>
-            <div class="title" id="message" style="white-space: pre-line;">{{commitMessage}}</div>
-          </v-card-title>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn 
-              :loading="doing"
-              :disabled="doing || !valid"
-              color="primary" 
-              @click="loader= 'doing'"
-            >
-              copy
-              <template v-slot:loader>
-                <span>copied!</span>
-              </template>
-            </v-btn>
-            <v-btn color="secondary" @click="reset">reset</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-    </v-layout>
-
+    <!-- GenerateText Component -->
+    <generated-text 
+      :generatedText="commitMessage"
+      :valid="valid"
+      @childReset="reset"
+    />
   </v-container>
 </template>
 
 <script>
+  import GeneratedText from './GeneratedText.vue'
   export default {
     data: () => ({
       valid: true,
@@ -82,8 +63,6 @@
       ],
       messageHeader: '',
       messageBody: '',
-      loader: null,
-      doing: false,
     }),
     computed: {
       commitMessage: function() {
@@ -101,43 +80,11 @@
         this.$refs.form.reset()
       },
     },
-    watch: {
-      loader () {
-        // commit message copy
-        const element = document.querySelector('#message');
-        const selection = window.getSelection();
-        const range = document.createRange();
-        range.selectNodeContents(element);
-        selection.removeAllRanges();
-        selection.addRange(range);
-        const succeeded = document.execCommand('copy');
-        if (succeeded) {
-            console.log('コピーが成功しました！');
-        } else {
-            console.log('コピーが失敗しました!');
-        }
-        selection.removeAllRanges();
-        // loader
-        const l = this.loader
-        this[l] = !this[l]
-        setTimeout(() => (this[l] = false), 3000)
-        this.loader = null
-      }
+    components: {
+      'generated-text': GeneratedText,
     }
   }
 </script>
 
 <style>
-  .custom-loader {
-    animation: loader 1s infinite;
-    display: flex;
-  }
-  @keyframes loader {
-    from {
-      transform: rotate(0);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
 </style>
