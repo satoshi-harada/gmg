@@ -44,16 +44,7 @@
       <v-flex xs12>
         <v-card>
           <v-card-title primary-title>
-            <div>
-              <div class="title" id="message" style="white-space: pre-line;">{{
-                  (!appName ? "" : "[" + appName + "] ") +
-                  (!funcName ? "" : "[" + funcName + "] ") +
-                  (!commitType ? "" : "[" + commitType + "] ") +
-                  (!messageHeader ? "" : messageHeader) + 
-                  '\n' + 
-                  '\n' +
-                  (!messageBody ? "" : messageBody)}}</div>
-            </div>
+            <div class="title" id="message" style="white-space: pre-line;">{{commitMessage}}</div>
           </v-card-title>
           <v-card-actions>
             <v-spacer></v-spacer>
@@ -95,7 +86,15 @@
       doing: false,
     }),
     computed: {
-
+      commitMessage: function() {
+        return (!this.appName ? "" : "[" + this.appName + "] ") +
+        (!this.funcName ? "" : "[" + this.funcName + "] ") +
+        (!this.commitType ? "" : "[" + this.commitType + "] ") +
+        (!this.messageHeader ? "" : this.messageHeader) + 
+        '\n' + 
+        '\n' +
+        (!this.messageBody ? "" : this.messageBody)
+      }
     },
     methods: {
       reset () {
