@@ -5,15 +5,15 @@ import Setting from './components/Setting.vue'
 export const routes = [
   {
     path: '/',
-    redirect: '/branch-name'
-  },
-  {
-    path: '/branch-name',
-    component: BranchName
+    redirect: '/commit-message'
   },
   {
     path: '/commit-message',
     component: CommitMessage
+  },
+  {
+    path: '/branch-name',
+    component: BranchName
   },
   {
     path: '/setting',

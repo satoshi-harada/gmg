@@ -56,7 +56,18 @@
             </div>
           </v-card-title>
           <v-card-actions>
-            <v-btn color="primary" @click="copy">copy</v-btn>
+            <v-spacer></v-spacer>
+            <v-btn 
+              :loading="doing"
+              :disabled="doing || !valid"
+              color="primary" 
+              @click="loader= 'doing'"
+            >
+              copy
+              <template v-slot:loader>
+                <span>copied!</span>
+              </template>
+            </v-btn>
             <v-btn color="secondary" @click="reset">reset</v-btn>
           </v-card-actions>
         </v-card>
@@ -69,7 +80,7 @@
 <script>
   export default {
     data: () => ({
-      valid: false,
+      valid: true,
       appName: '',
       funcName: '',
       commitType: '',
@@ -79,13 +90,21 @@
         'Refactoring'
       ],
       messageHeader: '',
-      messageBody: ''
+      messageBody: '',
+      loader: null,
+      doing: false,
     }),
+    computed: {
+
+    },
     methods: {
       reset () {
         this.$refs.form.reset()
       },
-      copy () {
+    },
+    watch: {
+      loader () {
+        // commit message copy
         const element = document.querySelector('#message');
         const selection = window.getSelection();
         const range = document.createRange();
@@ -99,10 +118,27 @@
             console.log('コピーが失敗しました!');
         }
         selection.removeAllRanges();
+        // loader
+        const l = this.loader
+        this[l] = !this[l]
+        setTimeout(() => (this[l] = false), 3000)
+        this.loader = null
       }
     }
   }
 </script>
 
 <style>
+  .custom-loader {
+    animation: loader 1s infinite;
+    display: flex;
+  }
+  @keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 </style>
