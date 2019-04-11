@@ -6,10 +6,10 @@
         Commit Message
         <v-icon>message</v-icon>
       </v-tab>
-      <v-tab to="/branch-name">
+      <!-- <v-tab to="/branch-name">
         Branch Name
         <v-icon>call_split</v-icon>
-      </v-tab>
+      </v-tab> -->
       <v-tab to="/setting">
         Setting
         <v-icon>settings</v-icon>

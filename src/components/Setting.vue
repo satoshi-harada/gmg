@@ -4,7 +4,7 @@
       <v-flex xs12>
         <v-card flat color="blue-grey lighten-3" class="white--text">
           <v-card-title>
-            <span class="headline"><v-icon medium color="white">message</v-icon> COMMIT MESSAGE</span>
+            <span class="headline"><v-icon medium color="white">message</v-icon> Commit Message Setting</span>
           </v-card-title>
           <v-container
             fluid
